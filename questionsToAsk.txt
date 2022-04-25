@@ -1,0 +1,99 @@
+how would I walk back parent pointers to root?
+walk path from n to root? probably same as above
+
+10/25/16: is LOCAL name actually the contents of the node(directory)? yes
+
+follow does what again? wrote on paper
+assume the path in follow is which type? relative
+
+ask about helper function for follow and what it does again. on paper
+
+
+
+10/31/2016
+help with helper functions
+help with listing
+
+Friday's class: getLocal and getChild helper functions? got it
+
+/*void relative(node* n, char* P){
+    //cwd + P?
+    if(P[0] == '/'){//check if absolute
+      P++;//remove first char
+      char* tokens;
+      char update[];//to be used to modify with
+      tokens = strtok(P, "/");
+      
+      while(tokens != NULL){
+        tokens = strtok(NULL, "/");// want all but first token
+        strcat(update, tokens);
+        strcat(update, "/");//add '/' back
+      }
+      update[strlen(update)-1] = '\0';//remove trailing '/'
+      //what do I do with n?
+    }
+}
+
+//char* last = strrchr(P, '/');//get '/localname'
+//char* localName = last++;// +1 to pointer to skip '/'
+
+/*if(charCompare(left->name, right->name) < 0) return -1;
+    else if(charCompare(left->name, right->name) > 0) return 1;
+    else return 0;*/
+    
+    
+    
+    char* getLocalName(char* P, char* stor){
+    //do I need to check if P is ab or rela
+    //I assume in this function that P is relative
+    char remaining[] = "";
+    char* tokens;
+    tokens = strtok(P, "/");//CAN'T HAVE SINGLE QUOTES
+    stor = tokens;
+    
+    //go to next localName
+    tokens = strtok(NULL, "/");
+    
+    while(tokens != NULL){
+      strcat(remaining, tokens);
+      strcat(remaining, "/");//add '/' back
+      token = strtok(NULL, "/");
+    }
+    remaining[strlen(remaining) - 1] = '\0';
+    return remaining; //I'm sure remaining is char* type
+}
+
+
+//programmersheaven.com/discussion/212794/find-index-to-the-last-occurrence-of-a-substring-in-c
+char* strstrlast(char* path, char* str){
+  char* strp;
+  int len1, len2;
+  len2 = strlen(str);
+  if(len2 == 0) 
+    return path;
+    
+  len1 = strlen(path);
+  if(len1 - len2 <= 0) 
+    return 0;
+  
+  strp = (char*)(path + len1 - len2);
+ 
+  while(strp != path){
+    if(*strp == *str){
+        if(strncmp(strp,str,len2)==0) 
+            return strp;
+    }
+    strp--;
+  }
+  return 0;  
+}
+
+
+11/3/16: t-cwd should = NULL?
+          do I need to check user's path type when passing it into interface functions? YES
+          is safeToCreate need other modifications YES
+          is insert good?
+          Ask about head includes last '/' or doesn't. my method doesn't but notes
+          is n->name right in printMatch?
+          check mkdir, touch and remove
+          look at errors I put in comments
